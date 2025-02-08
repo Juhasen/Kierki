@@ -10,6 +10,8 @@ module pl.juhas.kierki {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires Java.WebSocket;
+    requires jdk.httpserver;
 
     opens pl.juhas.kierki to javafx.fxml;
     exports pl.juhas.kierki;
