@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+import java.util.List;
+
 
 public class LobbyController {
 
@@ -30,9 +32,12 @@ public class LobbyController {
     }
 
     public void getAvailableRooms() {
-        for(Room room : client.getRooms()) {
-            roomsContainer.getChildren().add(new Label(room.getId()));
+        List<String> rooms = client.getAvailableRooms();
+        for (String room : rooms) {
+            Label roomLabel = new Label(room);
+            roomsContainer.getChildren().add(roomLabel);
         }
+        System.out.println(rooms);
     }
 
     @FXML

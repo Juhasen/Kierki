@@ -110,7 +110,9 @@ public class HeartsServer {
         }
 
         private void handleCreateRoom() {
-            Room room = new Room(UUID.randomUUID().toString());
+            short id = (short) (rooms.size() + 1);
+            String roomId = "Room_" + String.valueOf(id);
+            Room room = new Room(roomId);
             rooms.add(room);
             broadcastMessage("ROOM_CREATED " + room.getId());
         }

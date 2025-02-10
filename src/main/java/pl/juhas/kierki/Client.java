@@ -2,10 +2,17 @@ package pl.juhas.kierki;
 
 import java.io.*;
 import java.net.*;
+import java.util.List;
 
 public class Client {
     private static final String SERVER_ADDRESS = "localhost";
     private static final int SERVER_PORT = 8000;
+
+
+
+    LobbyController lobbyController;
+
+
 
     private String username;
 
@@ -25,17 +32,15 @@ public class Client {
                 try {
                     while ((serverMessage = in.readLine()) != null) {
                         System.out.println("Server: " + serverMessage);
+                        if(serverMessage.startsWith("ROOM_CREATED ")) {
+                            //update rooms in lobbycontroller
+
+                        }
                     }
                 } catch (IOException e) {
                     System.out.println("Connection to server lost.");
                 }
             }).start();
-
-            // Send messages to the server
-            String userInput;
-            while ((userInput = consoleReader.readLine()) != null) {
-                out.println(userInput);
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -112,6 +117,14 @@ public class Client {
 
     public String getUsername() {
         return username;
+    }
+
+    public List<String> getAvailableRooms() {
+        String rooms = getRooms();
+        if (rooms != null) {
+            return List.of(rooms.split("\n"));
+        }
+        return List.of();
     }
 }
 
